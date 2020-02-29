@@ -1,19 +1,19 @@
 ## #Programming Assignment: Catching the inverse of a Matrix
 # 1. makeCacheMatrix: This function creates a special "matrix" object that can
 # cache its inverse.
-
-## This functions will set and get the value of the matrix and then will do the same
-# with the value of the matrix inverse.
+# We can take the example with the Vector and apply it to a matrix
+## This functions will create a matrix that is really a list containing a function
+# to set and get the value of the matrix and the inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
-        i <- NULL
+        m <- NULL
         set <- function(y) { #Setting the value of the matrix
                 x <<- y
-                i <<- NULL
+                m <<- NULL
         }
         get <- function() x #Getting the value of the matrix
-        setinverse <- function(inverse) i <<- inverse #Setting the inverse of the matrix
-        getinverse <- function() i #Getting the inverse of the matrix
+        setinverse <- function(inverse) m <<- inverse #Setting the inverse of the matrix
+        getinverse <- function() m #Getting the inverse of the matrix
         list(set = set,
              get = get,
              setinverse = setinverse,
@@ -22,18 +22,18 @@ makeCacheMatrix <- function(x = matrix()) {
 
 #The following function calculates the inverse of the matrix returned by the previous
 #function. 
-#It will first check if the inverse has already been calculates. Ih thats the case, it will get
-#the inverse from the cache and sets the value of the inverse in the cache.
+#It will first check if the inverse has already been calculated. If thats the case, it will get
+#the inverse and sets the value of the inverse in the cache using the setinverse function.
 cacheSolve <- function(x, ...) {
-        i <- x$getinverse() #check the inverse
-        if (!is.null(i)) {
+        m <- x$getinverse() #check the inverse
+        if (!is.null(m)) {
                 message("getting cached data") #in case there is already an inverse it will get it from the cache
-                return(i)
+                return(m)
         }
         data <- x$get()
-        i <- solve(data, ...)
-        x$setinverse(i)
-        i
+        m <- solve(data, ...)
+        x$setinverse(m)
+        m
 }
 
 #If we use the function solve(#square matrix we want to evaluate#), we will get the
